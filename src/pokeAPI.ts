@@ -17,7 +17,7 @@ type Pokemon = {
 
 type PokeData = {
     name: string,
-    id: 44,
+    id: number,
     sprites: Sprites,
     types: Type[]
 }
