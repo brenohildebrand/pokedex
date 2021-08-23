@@ -1,4 +1,5 @@
 import './style.css'
+import './pokeAPI'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 app.style.backgroundColor = 'white'
