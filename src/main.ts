@@ -4,7 +4,7 @@ import './pokeAPI'
 const app = document.querySelector<HTMLDivElement>('#app')!
 app.style.backgroundColor = 'white'
 
-const createSearchBar = function() {
+function createSearchBar() {
   const searchBar = document.createElement('input');
   searchBar.style.padding = '15px 30px'
   searchBar.style.borderRadius = '30px'
@@ -18,7 +18,7 @@ const createSearchBar = function() {
   return searchBar
 }
 
-const createPokeball = function (){
+function createPokeball() {
   const xmlns = "http://www.w3.org/2000/svg"
 
   const pokeball = document.createElementNS(xmlns, 'svg')
@@ -72,12 +72,39 @@ const createPokeball = function (){
   return pokeball
 }
 
+function createWelcomeMessage() {
+  const box = document.createElement('div')
+
+  const text1 = document.createElement('p')
+  const text2 = document.createElement('p')
+  const text3 = document.createElement('p')
+
+  text1.innerText = 'Welcome to the'
+  text2.innerText = 'Pokemon World'
+  text3.innerText = 'Explore it further!'
+
+  text1.style.fontSize = '2rem'
+  text2.style.fontSize = '5rem'
+  text3.style.fontSize = '1rem'
+
+  box.appendChild(text1)
+  box.appendChild(text2)
+  box.appendChild(text3)
+
+  return box
+}
+
 const pokeball = createPokeball()
 pokeball.style.position = 'absolute'
 pokeball.style.zIndex = '-1'
-pokeball.style.height = '100vh'
+pokeball.style.height = '15vw'
+pokeball.style.top = '600px'
 
 const searchBar = createSearchBar()
 
-app.appendChild(pokeball)
-app.appendChild(searchBar)
+const welcomeMessage = createWelcomeMessage()
+
+app.appendChild(welcomeMessage)
+
+//app.appendChild(pokeball)
+//app.appendChild(searchBar)
