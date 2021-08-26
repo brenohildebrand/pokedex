@@ -1,9 +1,3 @@
-type AnimationCard = {
-    name: string
-    duration: number
-    animate: Function
-}
-
 class AnimatedElement {
     element: HTMLElement
     animationQueue: AnimationCard[]
