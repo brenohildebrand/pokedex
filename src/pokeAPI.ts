@@ -116,4 +116,4 @@ async function getPokeData(pokeName: string): Promise<Pokemon | Error> {
     return pokemon
 }
 
-export { getPokeData }
+export default getPokeData 
