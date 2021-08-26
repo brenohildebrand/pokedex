@@ -1,31 +1,31 @@
-import getPokeData from './pokeAPI'
+import { AnimationContext } from './animatedElement'
 import createSearchBar from './searchBar'
 import createMessage from './message'
-import createPokeCard from './pokeCard'
 import './style.css'
-
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 
-// const welcomeMessage = createMessage("Welcome to the Pokémon World!")
-// welcomeMessage.element.style.opacity = '0'
+const welcomeMessage = createMessage("Welcome to the Pokémon World!")
+const exploreMessage = createMessage("Explore it!")
+const searchBar = createSearchBar()
 
-// const exploreMessage = createMessage("Explore it!")
-// exploreMessage.element.style.opacity = '0'
+app.appendChild(welcomeMessage.element)
+app.appendChild(exploreMessage.element)
+app.appendChild(searchBar.element)
 
-// app.appendChild(welcomeMessage.element)
-// app.appendChild(exploreMessage.element)
+const defaultContext = new AnimationContext()
 
-// welcomeMessage.fadeIn()
-// welcomeMessage.fadeOut()
+const animationCards = 
+[
+  welcomeMessage.createFadeInCard(),
+  welcomeMessage.createFadeOutCard(),
+  exploreMessage.createFadeInCard(),
+  exploreMessage.createFadeOutCard(),
+  searchBar.createFadeInCard()
+]
 
-async function fn() {
+animationCards.forEach(function addCardToDefaultContext(card) {
+  defaultContext.add(card)
+})
 
-  const pokemon = await getPokeData('pikachu')
-  const pokeCard = createPokeCard(pokemon)
-  
-  app.append(pokeCard)
-
-}
-
-fn()
+defaultContext.start()

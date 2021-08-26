@@ -1,64 +1,77 @@
+class AnimationContext {
+    animationQueue: AnimationCard[]
+    previousAnimationDuration: number
+
+    constructor() {
+        this.animationQueue = []
+        this.previousAnimationDuration = 0
+    }
+
+    // Mechanics
+    start() {
+        console.log(this.animationQueue)
+        setTimeout(() => this.runAnimationQueue())
+    }
+
+    add(animationCard: AnimationCard) {
+        this.animationQueue.push(animationCard)
+    }
+
+    runAnimationQueue() {
+        if(this.animationQueue.length > 0) {
+            setTimeout
+            (
+                () => {
+                    this.runNextAnimation()
+                    this.runAnimationQueue()
+                },
+                this.previousAnimationDuration
+            )
+        }
+    }
+
+    runNextAnimation() {
+        const nextAnimationCard = this.animationQueue.shift()
+        nextAnimationCard?.animate()
+        this.previousAnimationDuration = nextAnimationCard?.duration || 0
+    }
+}
+
 class AnimatedElement {
     element: HTMLElement
-    animationQueue: AnimationCard[]
 
     constructor(tagName = 'div') {
         this.element = document.createElement(tagName);
         this.element.style.position = 'absolute'
-        this.animationQueue = []
-
-        setTimeout(() => this.runAnimationQueue())
+        this.element.style.opacity = '0'
     }
-    
-    // Mechanics
-    runAnimationQueue() {
-        let previousAnimationDuration = 0
-        while(this.animationQueue.length > 0) {
-            const nextAnimationCard = this.animationQueue.shift()
-            const 
-            { 
-                //name,
-                animate, 
-                duration 
-            } = nextAnimationCard!
 
-            setTimeout(() => animate.call(this), previousAnimationDuration)
-
-            //console.log('animating:', name)
-
-            previousAnimationDuration = duration
+    createFadeInCard(): AnimationCard {
+        return {
+            name: 'fadeIn',
+            duration: 3000,
+            animate: () => runFadeIn.call(this)
         }
     }
 
-    // Animations
-    fadeIn() {
-        this.animationQueue.push 
-        (
-            {
-                name: 'fadeIn',
-                duration: 3000,
-                animate: function runFadeIn(this: AnimatedElement) {
-                    this.element.style.transition = 'opacity 2s ease-in-out 1s'
-                    this.element.style.opacity = '1'
-                }    
-            }
-        )
+    createFadeOutCard(): AnimationCard {
+        return {
+            name: 'fadeOut',
+            duration: 3000,
+            animate: () => runFadeOut.call(this)
+        }
     }
-  
-    fadeOut() {
-        this.animationQueue.push
-        (
-            {
-                name: 'fadeOut',
-                duration: 3000,
-                animate: function runFadeOut(this: AnimatedElement) {
-                    this.element.style.transition = 'opacity 2s ease-in-out 1s'
-                    this.element.style.opacity = '0'
-                }
-            }
-        )
-    }
-
 } 
 
+function runFadeIn(this: AnimatedElement) {
+    this.element.style.transition = 'opacity 2s ease-in-out 1s'
+    this.element.style.opacity = '1'
+}
+
+function runFadeOut(this: AnimatedElement) {
+    this.element.style.transition = 'opacity 2s ease-in-out 1s'
+    this.element.style.opacity = '0'
+}
+
 export default AnimatedElement
+export { AnimationContext }

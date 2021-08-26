@@ -1,7 +1,9 @@
+import AnimatedElement from "./animatedElement"
+
 function createPokeCard(pokemon: Pokemon) {
-    const pokeCard = document.createElement('div')
-    pokeCard.style.display = 'flex'
-    pokeCard.style.flexDirection = 'row'
+    const pokeCard = new AnimatedElement()
+    pokeCard.element.style.display = 'flex'
+    pokeCard.element.style.flexDirection = 'row'
 
     const sprite = document.createElement('img')
     sprite.setAttribute('src', pokemon.sprite)
@@ -26,8 +28,8 @@ function createPokeCard(pokemon: Pokemon) {
     box.appendChild(name)
     box.appendChild(description)
 
-    pokeCard.appendChild(sprite)
-    pokeCard.appendChild(box)
+    pokeCard.element.appendChild(sprite)
+    pokeCard.element.appendChild(box)
 
     return pokeCard
 }
