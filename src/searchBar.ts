@@ -1,11 +1,12 @@
-import AnimatedElement from "./animatedElement"
-
 function createSearchBar() {
-    const animatedBox = new AnimatedElement()
-    animatedBox.element.style.display = 'flex'
-    animatedBox.element.style.flexDirection = 'row'
-    animatedBox.element.style.justifyContent = 'center'
-    animatedBox.element.style.alignItems = 'center'
+    const box = document.createElement('form')
+    box.style.display = 'flex'
+    box.style.flexDirection = 'row'
+    box.style.justifyContent = 'center'
+    box.style.alignItems = 'center'
+    box.style.transition = 'opacity 2s ease-in-out'
+    box.style.position = 'absolute'
+    box.style.opacity = '0'
 
     const pokeball = createPokeball()
     pokeball.style.marginRight = '3vw'
@@ -13,6 +14,7 @@ function createSearchBar() {
     pokeball.style.minHeight = '120px'
 
     const searchBar = document.createElement('input');
+    searchBar.setAttribute('name', 'searchBar')
     searchBar.setAttribute('placeholder', 'search for a Pokémon')
     searchBar.style.padding = '5px 10px'
     searchBar.style.borderRadius = '50px'
@@ -25,10 +27,10 @@ function createSearchBar() {
     searchBar.style.fontSize = '1.2rem'
     searchBar.style.textAlign = 'center'
 
-    animatedBox.element.appendChild(pokeball)
-    animatedBox.element.appendChild(searchBar)
+    box.appendChild(pokeball)
+    box.appendChild(searchBar)
 
-    return animatedBox
+    return box
   }
   
   function createPokeball() {
